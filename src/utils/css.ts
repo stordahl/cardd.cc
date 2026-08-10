@@ -36,8 +36,12 @@ export function parseCSS(searchParams: URLSearchParams): BadgeCSS {
     rawTheme === "light" ? "light" : rawTheme === "auto" ? "auto" : "dark";
   const colors = theme === "light" ? LIGHT : DARK;
 
-  const hex = (v: string | null, fallback: string) =>
-    v ? `#${v.replace(/^#/, "")}` : fallback;
+  const hex = (v: string | null, fallback: string) => {
+    if (!v) return fallback;
+    const stripped = v.replace(/^#/, "");
+    if (/^[0-9a-fA-F]{3,8}$/.test(stripped)) return `#${stripped}`;
+    return stripped;
+  };
 
   const num = (v: string | null, fallback: number) => {
     if (v === null) return fallback;
