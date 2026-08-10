@@ -27,12 +27,22 @@ for (const badge of BADGES) {
     try {
       const { label, value } = await badge.fetch(c);
       const response = await handleBadge(c, label, value);
-      trackBadge(c.env.BADGE_ANALYTICS, badge.id, "success", theme, Date.now() - start);
+      trackBadge(c.env, badge.id, "success", theme, Date.now() - start, {
+        referer: c.req.header("referer"),
+        userAgent: c.req.header("user-agent"),
+        country: c.req.header("cf-ipcountry"),
+        ip: c.req.header("cf-connecting-ip"),
+      });
       return response;
     } catch (err) {
       const { label, value } = badge.onError(err as Error, c);
       const response = await handleError(c, label, value);
-      trackBadge(c.env.BADGE_ANALYTICS, badge.id, "error", theme, Date.now() - start);
+      trackBadge(c.env, badge.id, "error", theme, Date.now() - start, {
+        referer: c.req.header("referer"),
+        userAgent: c.req.header("user-agent"),
+        country: c.req.header("cf-ipcountry"),
+        ip: c.req.header("cf-connecting-ip"),
+      });
       return response;
     }
   });
