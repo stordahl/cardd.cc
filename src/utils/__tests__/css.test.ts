@@ -45,8 +45,8 @@ describe("parseCSS", () => {
 
   it("parses named CSS colors", () => {
     const css = parseCSS(params("bg=red&color=dodgerblue"));
-    expect(css.bg).toBe("#red");
-    expect(css.color).toBe("#dodgerblue");
+    expect(css.bg).toBe("red");
+    expect(css.color).toBe("dodgerblue");
   });
 
   it("parses radius as a number", () => {
