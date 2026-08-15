@@ -6,6 +6,7 @@ import { NpmTypesBadge } from "./npm-types.js";
 import { GhStarsBadge } from "./gh-stars.js";
 import { GhIssuesBadge } from "./gh-issues.js";
 import { GhLastCommitBadge } from "./gh-last-commit.js";
+import { TangledSpindleStatus } from "./tangled-spindle-status.js";
 
 export const BADGES = [
   new StaticBadge(),
@@ -16,4 +17,5 @@ export const BADGES = [
   new GhStarsBadge(),
   new GhIssuesBadge(),
   new GhLastCommitBadge(),
+  new TangledSpindleStatus()
 ];
